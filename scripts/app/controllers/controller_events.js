@@ -9,7 +9,7 @@ define(["app/models/events", "app/views/events_widget"], function(Model, View) {
     _bindEvents();
   }
 
-  function _events_next() {  
+  function _events_next() {
     Model.setState([
       {
         "EVENT" : 'Free cheeseburgers with Willy the Wimpy Walrus',
