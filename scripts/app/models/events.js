@@ -1,5 +1,7 @@
 define(["app/events"], function(Events) {
-
+  var _uid = (+new Date()).toString(16) +
+      (Math.random() * 100000000 | 0).toString(16) +
+      Math.random(0,280000);
   var _model = _model || {};
   var _url = null;
 
@@ -44,7 +46,6 @@ define(["app/events"], function(Events) {
       }
     ]
     _model = model;
-    this.emit('change', _model);
     return _model;
   }
 
@@ -60,8 +61,10 @@ define(["app/events"], function(Events) {
   return {
     initialize : _initialize,
     fetch : _fetch,
+    model : _model,
     get : _get,
-    setState : _setState
+    setState : _setState,
+    uid : _uid
   }
 
 });

@@ -6,18 +6,21 @@ define(function(){
     console.log(this);
   }
 
-  function _listenTo(eventName) {
+  function _listenTo(model, eventName, callback) {
     _listeners.push({
       "listener" : this,
-      "event" : eventName
+      "model" : model,
+      "event" : eventName,
+      "callback" : callback
     })
   }
 
   function _emitEvent(eventName, payload) {
-    console.log(this, payload)
+
     for(var i = 0, N = _listeners.length; i < N; i++) {
-      _listeners["listener"].setState(payload);
-      _listeners["listener"].render();
+      if(_listeners[i]["model"].uid == this.uid) {
+        _listeners[i].callback(payload);
+      }
     }
     return {
       "event" : eventName,
@@ -28,7 +31,7 @@ define(function(){
   return {
     on : _on,
     emit : _emitEvent,
-    listenTo : listenTo
+    listenTo : _listenTo
   }
 
 });
