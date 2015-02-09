@@ -16,15 +16,10 @@ define(function(){
   }
 
   function _emitEvent(eventName, payload) {
-
     for(var i = 0, N = _listeners.length; i < N; i++) {
-      if(_listeners[i]["model"].uid == this.uid) {
+      if(_listeners[i]["model"].uid == this.uid && _listeners[i]["event"] == eventName) {
         _listeners[i].callback(payload);
       }
-    }
-    return {
-      "event" : eventName,
-      "object" : this
     }
   }
 
