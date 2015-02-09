@@ -1,16 +1,16 @@
 define(function() {
 
-  function _load_page(path) {
+  function _load_page() {
     require(["app/models/page", "app/views/page"], function(Model, View) {
-      Model.initialize(path);
+      Model.initialize('1');
       View.initialize($('#page'), Model);
       View.render();
     });
   }
 
-  function _load_video_page(path) {
-    require(["app/models/page", "app/views/video_page"], function(Model, View) {
-      Model.initialize(path);
+  function _load_video_page() {
+    require(["app/models/videos", "app/views/video_page"], function(Model, View) {
+      Model.initialize('4');
       View.initialize($('#page'), Model);
       View.render();
     });

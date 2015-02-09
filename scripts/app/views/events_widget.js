@@ -1,4 +1,8 @@
 define(["app/assets/transitions", "app/events"], function(Transitions, Events){
+  var _uid = (+new Date()).toString(16) +
+      (Math.random() * 100000000 | 0).toString(16) +
+      Math.random(0,280000);
+
   var Model, _el, _model = null;
   var _transitionInType = 'default';
 
@@ -31,6 +35,7 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
 
   return {
     initialize : _initialize,
-    render : _render
+    render : _render,
+    uid : _uid
   }
 });

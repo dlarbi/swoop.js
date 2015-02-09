@@ -10,12 +10,12 @@ define(["app/events"], function(Events) {
 
   function _initialize(endpoint) {
     _endpoint = 'http://jsonplaceholder.typicode.com/posts/' + endpoint;
-    console.log(_endpoint)
     $.extend(this, Events)
   }
 
   function _fetch() {
     var self = this;
+
     $.ajax({
       url: _endpoint,
       success:function(data) {
@@ -42,6 +42,6 @@ define(["app/events"], function(Events) {
     get : _get,
     setState : _setState,
     uid : _uid
-  }
 
+  }
 });

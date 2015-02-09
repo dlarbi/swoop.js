@@ -1,4 +1,7 @@
 define(["app/assets/transitions", "app/events"], function(Transitions, Events){
+  var _uid = (+new Date()).toString(16) +
+      (Math.random() * 100000000 | 0).toString(16) +
+      Math.random(0,280000);
 
   var Model;
   var _el = null;
@@ -11,13 +14,18 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
     _el = el;
     Model = model;
     _model = Model.fetch();
-    _bindToModel.call(this, Model, 'change', _update);
+    this.listenTo.call(this, Model, 'change', _update);
   }
 
-  function _render() {
-    Transitions[_transitionInType](_el, function() {
-      _el.html('<h1>' + _model["H1"] + '</h1><br>' + _model["BLURB"]);
-    });
+  function _render(transitions) {
+    if(transitions != 'no-transitions') {
+      Transitions[_transitionInType](_el, function() {
+        _el.html('<h1>' + _model["title"] + '</h1><br>' + _model["body"]);
+      });
+    } else {
+      _el.html('<h1>' + _model["title"] + '</h1><br>' + _model["body"]);
+    }
+
   }
 
   function _bindToModel(model, eventName, callback) {
@@ -26,11 +34,12 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
 
   function _update(payload) {
     _model = payload;
-    _render();
+    _render('no-transitions');
   }
 
   return {
     initialize : _initialize,
-    render : _render
+    render : _render,
+    uid : _uid
   }
 });
