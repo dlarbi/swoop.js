@@ -3,7 +3,8 @@ define(["app/controllers/controller"], function(Controller) {
   var _routes = {
     "#/home" : 'default_action',
     "#/about" : 'default_action',
-    "#/api_docs" : 'load_video_page'
+    "#/api_docs" : 'load_video_page',
+    "#/photo_album" : 'load_photo_page'
   }
 
   var _currentPath = window.location.hash;

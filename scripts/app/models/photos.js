@@ -9,16 +9,17 @@ define(["app/events"], function(Events) {
   var _endpoint = null;
 
   function _initialize(endpoint) {
-    _endpoint = 'http://jsonplaceholder.typicode.com/posts/' + endpoint;
-    $.extend(this, Events)
+    _endpoint = 'http://jsonplaceholder.typicode.com/photos/?albumId=' + endpoint;
+    $.extend(this, Events);
   }
 
   function _fetch() {
     var self = this;
+
     $.ajax({
       url: _endpoint,
       success:function(data) {
-        self.setState(data)
+        self.setState(data);
       }
     });
 
@@ -41,6 +42,6 @@ define(["app/events"], function(Events) {
     get : _get,
     setState : _setState,
     uid : _uid
-  }
 
+  }
 });

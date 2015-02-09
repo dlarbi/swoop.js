@@ -8,7 +8,6 @@ define(function(){
 
   function _listenTo(model, eventName, callback) {
     var alreadyListening = 0;
-    console.log(_listeners)
     for(var i = 0, N = _listeners.length; i < N; i++) {
 
       if(_listeners[i]["listener"].uid == this.uid) alreadyListening = 1;
