@@ -7,9 +7,10 @@ define(["app/events"], function(Events) {
   var _model = _model || {};
   var _url = null;
   var _endpoint = null;
+  var _currentAlbumId = 1;
 
-  function _initialize(endpoint) {
-    _endpoint = 'http://jsonplaceholder.typicode.com/photos/?albumId=' + endpoint;
+  function _initialize() {
+    _endpoint = 'http://jsonplaceholder.typicode.com/photos/?albumId=';
     $.extend(this, Events);
   }
 
@@ -17,7 +18,7 @@ define(["app/events"], function(Events) {
     var self = this;
 
     $.ajax({
-      url: _endpoint,
+      url: _endpoint + _currentAlbumId,
       success:function(data) {
         self.setState(data);
       }
@@ -35,13 +36,19 @@ define(["app/events"], function(Events) {
     return _model[key];
   }
 
+  function _albumNext() {
+    _currentAlbumId++;
+    _fetch.call(this);
+  }
+
   return {
     initialize : _initialize,
     model : _model,
     fetch : _fetch,
     get : _get,
     setState : _setState,
-    uid : _uid
+    uid : _uid,
+    albumNext : _albumNext
 
   }
 });

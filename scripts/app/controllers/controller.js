@@ -16,7 +16,7 @@ define(function() {
     });
   }
 
-  function _load_photo_page() {    
+  function _load_photo_page() {
     require(["app/models/photos", "app/views/photo_page"], function(Model, View) {
       Model.initialize('1'); //albumId = 1 so we can page by increasing this value;
       View.initialize($('<div id="page"></div>'), Model);
