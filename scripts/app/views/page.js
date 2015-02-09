@@ -25,6 +25,7 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
     } else {
       _el.html('<h1>' + _model["title"] + '</h1><br>' + _model["body"]);
     }
+    $('#main-content').html(_el);
 
   }
 

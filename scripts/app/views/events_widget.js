@@ -19,7 +19,7 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
       _el.html('');
       _el.append('<div id="events_next" style="text-decoration:underline; cursor:pointer;">Next Month</div>');
       for(var i = 0, N = _model.length; i < N; i++) {
-        _el.append('<div class="col-md-3" style="padding:40px;"><p>' + _model[i]["DATE"] + '</p><p>' + _model[i]["EVENT"] + '</p><div class="btn btn-primary">RSVP</div></div>');
+        _el.append('<div class="col-md-6" style="padding:40px;"><p>' + _model[i]["DATE"] + '</p><p>' + _model[i]["EVENT"] + '</p><div class="btn btn-primary">RSVP</div></div>');
       }
     });
   }

@@ -25,6 +25,7 @@ define(["app/assets/transitions", "app/events"], function(Transitions, Events){
     } else {
       _el.html('<h2>' + _model["title"] + '</h2><br>' + _model["body"] + '<br><div style="width:200px; height:130px; border:1px solid #efefef; margin:0 auto;">VIDEO</div>');
     }
+    $('#main-content').html(_el);
   }
 
   function _bindToModel(model, eventName, callback) {
