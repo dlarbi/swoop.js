@@ -1,49 +1,29 @@
-define(["app/assets/transitions", "app/events"], function(Transitions, Events){
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
+define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
-  var Model, _el, _model = null;
-  var _transitionInType = 'default';
-
-  function _initialize(el, model) {
-    $.extend(this, Events);
-    _el = el;
-    Model = model;
-    _bindToModel.call(this, Model, 'change', _update);
-    _model = Model.fetch();
-
+  function Photos_View() {
+    BaseView.call(this);
   }
 
-  function _render() {
-    Transitions[_transitionInType](_el, function() {
-      _el.html('<div class="container"><div id="next-page">Next</div></div>')
-      for(var i = 0, N = _model.length; i < N; i++) {
-        _el.find('.container').append('<div class="col-sm-2" style="padding:20px 0;"><img width="100%" src="' + _model[i]["thumbnailUrl"] + '"/img></div>');
-      }
-    });
-    $('#main-content').html(_el);
-    _bindEvents();
+  Photos_View.prototype = Object.create(BaseView.prototype);
+
+  Photos_View.prototype.render = function() {
+
+    var htmlOut = this.Templating.buildTemplate(
+      '<div class="container"><div id="next-page">Next</div>'+
+        '<% for(var index in this) { %>'+
+          '<div class="col-sm-2" style="padding:20px 0;"><img width="100%" src="<% this[index]["thumbnailUrl"] %>"/></div>'+
+        '<% } %>'+
+      '</div>',
+      this.model.attributes
+    );
+
+    this.el.html(htmlOut);
+    $('#main-content').html(this.el);
   }
 
-  function _bindEvents(){
-    $('#next-page').off('click').on('click', function() {
-      Model.albumNext();
-    })
-  }
+  Photos_View.prototype.constructor = Photos_View;
 
-  function _bindToModel(model, eventName, callback) {
-    this.listenTo(model, eventName, callback);
-  }
+  var View = View || new Photos_View();
+  return View;
 
-  function _update(payload) {
-    _model = payload;
-    _render();
-  }
-
-  return {
-    initialize : _initialize,
-    render : _render,
-    uid : _uid
-  }
 });

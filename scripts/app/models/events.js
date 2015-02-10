@@ -1,17 +1,13 @@
-define(["app/events"], function(Events) {
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
-  var _model = _model || {};
-  var _url = null;
+define(["app/events", "app/models/BaseModel"], function(Events, BaseModel) {
 
-  function _initialize(url) {
-    _url = url;
-    $.extend(this, Events)
+  function Events_Model() {
+    BaseModel.call(this);
   }
 
-  function _fetch() {
-    model = [
+  Events_Model.prototype = Object.create(BaseModel.prototype);
+
+  Events_Model.prototype.fetch = function() {
+    this.setState([
       {
         "EVENT" : 'Odin the destroyer of worlds, on Ice.',
         "DATE" : '2013'
@@ -44,27 +40,11 @@ define(["app/events"], function(Events) {
         "EVENT" : 'The Statue of Liberty vs Godzilla: round 2',
         "DATE" : '2014'
       }
-    ]
-    _model = model;
-    return _model;
+    ])
+    return;
   }
-
-  function _get(key) {
-    return _model[key];
-  }
-
-  function _setState(model) {
-    _model = model;
-    this.emit('change', _model);
-  }
-
-  return {
-    initialize : _initialize,
-    fetch : _fetch,
-    model : _model,
-    get : _get,
-    setState : _setState,
-    uid : _uid
-  }
+  Events_Model.prototype.constructor = Events_Model;
+  var Model = Model || new Events_Model();
+  return Model;
 
 });

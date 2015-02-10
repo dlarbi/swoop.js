@@ -1,46 +1,20 @@
-define(["app/assets/transitions", "app/events"], function(Transitions, Events){
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
+define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
-  var Model;
-  var _el = null;
-  var _transitionInType = 'default';
-  // _model is just its data
-  var _model = null;
-
-  function _initialize(el, model) {
-    $.extend(this, Events);
-    _el = el;
-    Model = model;
-    _model = Model.fetch();
-    this.listenTo.call(this, Model, 'change', _update);
+  function Page_View() {
+    BaseView.call(this);
   }
 
-  function _render(transitions) {
-    if(transitions != 'no-transitions') {
-      Transitions[_transitionInType](_el, function() {
-        _el.html('<h1>' + _model["title"] + '</h1><br>' + _model["body"]);
-      });
-    } else {
-      _el.html('<h1>' + _model["title"] + '</h1><br>' + _model["body"]);
-    }
-    $('#main-content').html(_el);
-
+  Page_View.prototype = Object.create(BaseView.prototype);
+  Page_View.prototype.render = function() {
+    var htmlOut = this.Templating.buildTemplate(
+      '<h1><% this.title %></h1><% this.body %>',
+      this.model.attributes
+    );
+    this.el.html(htmlOut)
+    $('#main-content').html(this.el);
   }
+  Page_View.prototype.constructor = Page_View;
+  var View = View || new Page_View();
+  return View;
 
-  function _bindToModel(model, eventName, callback) {
-    this.listenTo(model, eventName, callback);
-  }
-
-  function _update(payload) {
-    _model = payload;
-    _render('no-transitions');
-  }
-
-  return {
-    initialize : _initialize,
-    render : _render,
-    uid : _uid
-  }
 });

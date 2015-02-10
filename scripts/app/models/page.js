@@ -1,46 +1,16 @@
-define(["app/events"], function(Events) {
+define(["app/events", "app/models/BaseModel"], function(Events, BaseModel) {
 
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
-
-  var _model = _model || {};
-  var _url = null;
-  var _endpoint = null;
-
-  function _initialize(endpoint) {
-    _endpoint = 'http://jsonplaceholder.typicode.com/posts/' + endpoint;
-    $.extend(this, Events)
+  function Page_Model() {
+    BaseModel.call(this);
   }
 
-  function _fetch() {
-    var self = this;
-    $.ajax({
-      url: _endpoint,
-      success:function(data) {
-        self.setState(data)
-      }
-    });
-
-    return _model;
+  Page_Model.prototype = Object.create(BaseModel.prototype);
+  Page_Model.prototype.initialize = function() {
+    this.endpoint = 'http://jsonplaceholder.typicode.com/posts/2';
+    $.extend(this, Events);
   }
-
-  function _setState(model) {
-    _model = model;
-    this.emit('change', _model);
-  }
-
-  function _get(key) {
-    return _model[key];
-  }
-
-  return {
-    initialize : _initialize,
-    model : _model,
-    fetch : _fetch,
-    get : _get,
-    setState : _setState,
-    uid : _uid
-  }
+  Page_Model.prototype.constructor = Page_Model;
+  var Model = Model || new Page_Model();
+  return Model;
 
 });

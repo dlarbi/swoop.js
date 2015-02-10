@@ -1,45 +1,22 @@
-define(["app/assets/transitions", "app/events"], function(Transitions, Events){
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
+define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
-  var Model;
-  var _el = null;
-  var _transitionInType = 'default';
-  // _model is just its data
-  var _model = null;
-
-  function _initialize(el, model) {
-    $.extend(this, Events);
-    _el = el;
-    Model = model;
-    _model = Model.fetch();
-    _bindToModel.call(this, Model, 'change', _update);
+  function Video_View() {
+    BaseView.call(this);
   }
 
-  function _render(transitions) {
-    if(transitions != 'no-transitions') {
-      Transitions[_transitionInType](_el, function() {
-        _el.html('<h2>' + _model["title"] + '</h2><br>' + _model["body"] + '<br><div style="width:200px; height:130px; border:1px solid #efefef; margin:0 auto;">VIDEO</div>');
-      });
-    } else {
-      _el.html('<h2>' + _model["title"] + '</h2><br>' + _model["body"] + '<br><div style="width:200px; height:130px; border:1px solid #efefef; margin:0 auto;">VIDEO</div>');
-    }
-    $('#main-content').html(_el);
-  }
+  Video_View.prototype = Object.create(BaseView.prototype);
+  Video_View.prototype.render = function() {
 
-  function _bindToModel(model, eventName, callback) {
-    this.listenTo(model, eventName, callback);
-  }
+    var htmlOut = this.Templating.buildTemplate(
+      '<h2><% this.title %></h2><% this.body %><div style="width:200px; height:130px; border:1px solid #efefef; margin:0 auto;">VIDEO</div>',
+      this.model.attributes
+    );
+    this.el.html(htmlOut)
+    $('#main-content').html(this.el);   
 
-  function _update(payload) {
-    _model = payload;
-    _render('no-transitions');
   }
+  Video_View.prototype.constructor = Video_View;
+  var View = View || new Video_View();
+  return View;
 
-  return {
-    initialize : _initialize,
-    render : _render,
-    uid : _uid
-  }
 });

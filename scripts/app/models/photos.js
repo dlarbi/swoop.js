@@ -1,54 +1,32 @@
-define(["app/events"], function(Events) {
+define(["app/events", "app/models/BaseModel"], function(Events, BaseModel) {
 
-  var _uid = (+new Date()).toString(16) +
-      (Math.random() * 100000000 | 0).toString(16) +
-      Math.random(0,280000);
-
-  var _model = _model || {};
-  var _url = null;
-  var _endpoint = null;
-  var _currentAlbumId = 1;
-
-  function _initialize() {
-    _endpoint = 'http://jsonplaceholder.typicode.com/photos/?albumId=';
-    $.extend(this, Events);
+  function Photos_Model() {
+    BaseModel.call(this);
+    this.currentAlbumId = 1;
   }
 
-  function _fetch() {
+  Photos_Model.prototype = Object.create(BaseModel.prototype);
+  Photos_Model.prototype.initialize = function() {
+    this.endpoint = 'http://jsonplaceholder.typicode.com/photos/?albumId=';
+    $.extend(this, Events);
+  }
+  Photos_Model.prototype.fetch = function() {
     var self = this;
-
     $.ajax({
-      url: _endpoint + _currentAlbumId,
+      url: this.endpoint + self.currentAlbumId,
       success:function(data) {
         self.setState(data);
       }
     });
-
-    return _model;
+    return;
   }
-
-  function _setState(model) {
-    _model = model;
-    this.emit('change', _model);
+  Photos_Model.prototype.albumNext = function() {
+    this.currentAlbumId++;
+    this.fetch();
   }
+  Photos_Model.prototype.constructor = Photos_Model;
+  var Model = Model || new Photos_Model();
+  return Model;
 
-  function _get(key) {
-    return _model[key];
-  }
 
-  function _albumNext() {
-    _currentAlbumId++;
-    _fetch.call(this);
-  }
-
-  return {
-    initialize : _initialize,
-    model : _model,
-    fetch : _fetch,
-    get : _get,
-    setState : _setState,
-    uid : _uid,
-    albumNext : _albumNext
-
-  }
 });
