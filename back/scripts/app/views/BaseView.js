@@ -37,25 +37,6 @@ define(["app/events", "../../helper/templating"], function(Events, Templating) {
   }
   BaseView.prototype.Templating = Templating;
 
-  BaseView.extend = function(members){
-    var self = this;
-    function ExtendedView() {
-      self.call(this);
-    }
-    ExtendedView.prototype = Object.create(self.prototype);
-    for (var key in members) {
-      if (members.hasOwnProperty(key)) {
-        var obj = members[key];
-        ExtendedView.prototype[key] = obj;
-      }
-    }
-    ExtendedView.prototype.super = function() {
-      console.log(self.prototype.render.call(this))
-    }
-    ExtendedView.prototype.constructor = ExtendedView;
-    return ExtendedView;
-  };
-
   return BaseView;
 
 });

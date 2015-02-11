@@ -31,7 +31,14 @@ define(function() {
   }
 
   function _load_sandbox() {
-    alert('Welcome to the sandbox.  Do what you will.');
+    require(["app/models/BaseModel"], function(BaseModel) {
+
+      var model = new BaseModel();
+      model.initialize('posts/1')
+      var model2 = new BaseModel();
+      model2.initialize('posts/2')
+      console.log(model, model2)
+    });
   }
 
   return {
