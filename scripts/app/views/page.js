@@ -9,7 +9,8 @@ define(["app/views/BaseView"], function(BaseView) {
       var htmlOut = this.Templating.buildTemplate(
         '<h1><% this.title %></h1>'+
         '<% this.body %>'+
-        '<div id="btn">BUTTON</div>',
+        '<div id="btn">Load Todo Widget</div>'+
+        '<div id="todo-widget-container" class="col-md-4 col-md-offset-4"></div>',
         this.model.attributes
       );
       this.el.html(htmlOut)
@@ -17,7 +18,9 @@ define(["app/views/BaseView"], function(BaseView) {
     },
 
     loadToDoWidget : function() {
-      console.log('ToDo Widget Loaded')
+      require(["app/controllers/controller"], function(Controller) {
+        Controller.load_todo_widget();
+      });
     }
   });
 

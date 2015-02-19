@@ -35,7 +35,11 @@ define(function() {
   }
 
   function _load_todo_widget() {
-
+    require(["app/models/todo_model", "app/views/todo_view"], function(Model, View) {
+      Model.initialize(); //albumId = 1 so we can page by increasing this value;
+      View.initialize(Model);
+      View.render('#todo-widget-container');
+    });
   }
 
   return {
@@ -44,7 +48,7 @@ define(function() {
     load_video_page : _load_video_page,
     load_events_widget : _load_events_widget,
     load_sandbox: _load_sandbox,
-    load_todo: _load_todo_widget
+    load_todo_widget: _load_todo_widget
   }
 
 });

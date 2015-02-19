@@ -36,6 +36,12 @@ define(["app/events"], function(Events) {
     return this.attributes[key];
   };
 
+  BaseModel.prototype.pushAttribute = function(data) {
+    var n = this.attributes.length;
+    this.attributes[n] = data;
+    this.emit('change', this.attributes);
+  };
+
   BaseModel.extend = function(members){
     var self = this;
     function ExtendedModel() {
