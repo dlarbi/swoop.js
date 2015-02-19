@@ -9,14 +9,14 @@ define(["app/views/BaseView"], function(BaseView) {
     render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
         '<div class="todo-widget">'+
-          '<h1>Todo Widget</h1>'+
+          '<h3>Todo Widget</h3>'+
           '<ul id="todo-list">'+
             '<% for(var index in this) { %>'+
               '<% this[index]["TODO"] %>'+
             '<% } %>'+
           '</ul>'+
           '<input type="text" id="todo-input"/>'+
-          '<div id="add-todo" style="padding:3px; background:#efefef;">Add Todo</div>'+
+          '<div id="add-todo" class="btn btn-primary">Add Todo</div>'+
         '</div>',
         this.model.attributes
       );

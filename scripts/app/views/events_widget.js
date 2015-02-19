@@ -3,7 +3,8 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
   var Events_View = BaseView.extend({
 
     events: {
-      'click #events_next': 'eventsNext'
+      'click #events_next': 'eventsNext',
+      'click .rsvp-button': 'rsvpModal'
     },
 
     render : function(DOMElement) {
@@ -12,7 +13,7 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
             '<% for(var index in this) { %>'+
               '<div class="col-md-6" style="padding:40px;"><p><% this[index]["DATE"] %></p>'+
                 '<p><% this[index]["EVENT"] %></p>'+
-                '<div class="btn btn-primary">RSVP</div>'+
+                '<div class="btn btn-primary rsvp-button" data-modal="<% this[index]["EVENT"] %>">RSVP</div>'+
               '</div>'+
             '<% } %>'+
           '</div>',
@@ -24,6 +25,10 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
     eventsNext : function() {
       View.model.eventsNext();
+    },
+
+    rsvpModal : function() {
+      alert($(this).attr('data-modal'))
     }
 
   });

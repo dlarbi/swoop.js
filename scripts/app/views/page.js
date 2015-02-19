@@ -2,14 +2,14 @@ define(["app/views/BaseView"], function(BaseView) {
 
   var Page_View = BaseView.extend({
     events : {
-      'click #btn' : 'loadToDoWidget'
+      'click #load-todo-widget-btn' : 'loadToDoWidget'
     },
 
     render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
         '<h1><% this.title %></h1>'+
-        '<% this.body %>'+
-        '<div id="btn">Load Todo Widget</div>'+
+        '<p><% this.body %></p>'+
+        '<span id="load-todo-widget-btn" class="btn btn-success">Load Todo Widget</span>'+
         '<div id="todo-widget-container" class="col-md-4 col-md-offset-4"></div>',
         this.model.attributes
       );
