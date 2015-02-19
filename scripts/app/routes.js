@@ -5,7 +5,8 @@ define(["app/controllers/controller"], function(Controller) {
     "#/about" : 'default_action',
     "#/api_docs" : 'load_video_page',
     "#/photo_album" : 'load_photo_page',
-    "#/sandbox" : 'load_sandbox'
+    "#/sandbox" : 'load_sandbox',
+    "#/todo" : 'load_todo'
   }
 
   var _currentPath = window.location.hash;

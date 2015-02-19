@@ -21,17 +21,21 @@ define(["app/events"], function(Events) {
   };
 
   BaseModel.prototype.nonUniqueId = Math.random(130,140);
+
   BaseModel.prototype.initialize = function(endpoint) {
     this.endpoint = 'http://jsonplaceholder.typicode.com/' + endpoint;
     $.extend(this, Events);
   };
+
   BaseModel.prototype.setState = function(newAttributes) {
     this.attributes = newAttributes;
     this.emit('change', this.attributes);
   };
+
   BaseModel.prototype.get = function(key) {
     return this.attributes[key];
   };
+
   BaseModel.extend = function(members){
     var self = this;
     function ExtendedModel() {
@@ -47,6 +51,7 @@ define(["app/events"], function(Events) {
     ExtendedModel.prototype.constructor = ExtendedModel;
     return ExtendedModel;
   };
+
   return BaseModel;
 
 });

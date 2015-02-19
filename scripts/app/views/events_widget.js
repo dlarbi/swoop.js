@@ -2,7 +2,11 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
   var Events_View = BaseView.extend({
 
-    render : function() {
+    events: {
+      'click #events_next': 'eventsNext'
+    },
+
+    render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
           '<div id="events_next" style="text-decoration:underline; cursor:pointer;">Next Month</div>'+
             '<% for(var index in this) { %>'+
@@ -15,7 +19,13 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
         this.model.attributes
       );
       this.el.html(htmlOut);
+      $(DOMElement).html(this.el);
+    },
+
+    eventsNext : function() {
+      View.model.eventsNext();
     }
+
   });
 
   var View = View || new Events_View();

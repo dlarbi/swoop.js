@@ -2,10 +2,6 @@ define(function(){
 
   var _listeners = [];
 
-  function _on(eventName, callback) {
-    console.log(this);
-  }
-
   function _listenTo(model, eventName, callback) {
     var alreadyListening = 0;
     for(var i = 0, N = _listeners.length; i < N; i++) {
@@ -30,7 +26,6 @@ define(function(){
   }
 
   return {
-    on : _on,
     emit : _emitEvent,
     listenTo : _listenTo
   }

@@ -2,7 +2,12 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
 
   var Photos_View = BaseView.extend({
 
-    render : function() {
+    events: {
+      'click #photos-next-page' : 'nextAlbum',
+      'click #photos-prev-page' : 'previousAlbum'
+    },
+
+    render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
           '<div class="container"><div id="photos-prev-page">Previous</div><div id="photos-next-page">Next</div>'+
             '<% for(var index in this) { %>'+
@@ -12,20 +17,17 @@ define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
         this.model.attributes
       );
       this.el.html(htmlOut);
-      $('#main-content').html(this.el);
-      this.bindEvents();
+      $(DOMElement).html(this.el);
     },
 
-    bindEvents : function() {
-      var self = this;
-      $('#photos-next-page').off('click').on('click', function() {
-        var i = self.model.getCurrentAlbum();
-        self.model.setCurrentAlbum(i+1);
-      });
-      $('#photos-prev-page').off('click').on('click', function() {
-        var i = self.model.getCurrentAlbum();
-        self.model.setCurrentAlbum(i-1);
-      });
+    previousAlbum: function() {
+      var i = View.model.getCurrentAlbum();
+      View.model.setCurrentAlbum(i-1);
+    },
+
+    nextAlbum: function() {
+      var i = View.model.getCurrentAlbum();
+      View.model.setCurrentAlbum(i+1);
     }
   });
 

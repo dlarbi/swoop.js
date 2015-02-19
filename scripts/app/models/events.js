@@ -37,7 +37,21 @@ define(["app/events", "app/models/BaseModel"], function(Events, BaseModel) {
         }
       ]);
       return false;
+    },
+
+    eventsNext : function() {
+      this.setState([
+        {
+          "EVENT" : 'Free cheeseburgers with Willy the Wimpy Walrus',
+          "DATE" : '2013'
+        },
+        {
+          "EVENT" : 'Vader vs Maul. XXX',
+          "DATE" : '2013'
+        }
+      ]);
     }
+
   });
 
   var Model = Model || new Events_Model();

@@ -1,20 +1,24 @@
-define(["app/events", "app/views/BaseView"], function(Events, BaseView) {
-
+define(["app/views/BaseView"], function(BaseView) {
 
   var Page_View = BaseView.extend({
-    render : function() {
-      var callee = arguments.callee;
-      console.log(this)
-      this.super()
+    events : {
+      'click #btn' : 'loadToDoWidget'
+    },
+
+    render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
         '<h1><% this.title %></h1>'+
-        '<% this.body %>',
+        '<% this.body %>'+
+        '<div id="btn">BUTTON</div>',
         this.model.attributes
       );
       this.el.html(htmlOut)
-      $('#main-content').html(this.el);
-    }
+      $(DOMElement).html(this.el);
+    },
 
+    loadToDoWidget : function() {
+      console.log('ToDo Widget Loaded')
+    }
   });
 
   var View = View || new Page_View();
