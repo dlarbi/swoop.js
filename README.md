@@ -1,7 +1,7 @@
 # swoop.js
 Swoop is a small MVC framework that helps build single page applications.  Uses require.js for modularity and jQuery for some DOM interactions.
 
-Swoop has event-driven Model-View data bindings, simple view event bindings, core classes for Models, Views, Events, Router, Templating.  This is a sample app that allows users to drag around a google map, and see their views bound to geo-located twitter data.
+Swoop has event-driven one way Model-View data bindings, simplified event system for your views, core classes for Models, Views, Events, Router, Templating.  This repo is a sample app built with Swoop, that allows users to drag around a google map, and see their views bound to geo-located twitter data.
 
 ####Building our twitter-google maps mashup application with Swoop
 
