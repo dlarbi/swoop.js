@@ -67,6 +67,7 @@ define(["app/events", "../../helper/templating"], function(Events, Templating) {
         ExtendedView.prototype[key] = obj;
       }
     }
+    ExtendedView.extend = this.extend;
     ExtendedView.prototype.constructor = ExtendedView;
     return ExtendedView;
   };

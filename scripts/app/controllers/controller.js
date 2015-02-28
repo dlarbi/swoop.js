@@ -1,7 +1,8 @@
 define(function() {
 
   function _load_map() {
-    require(["app/models/map_model", "app/views/map_view"], function(Model, View) {
+    require(["app/models/map_model", "app/views/map_view"], function(Model, Map_View) {
+      View = new Map_View();
       Model.initialize();
       View.initialize(Model);
       View.render('#map-container');

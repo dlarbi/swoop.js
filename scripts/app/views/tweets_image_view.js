@@ -1,6 +1,8 @@
-define(["app/views/BaseView"], function(BaseView) {
+define(["app/views/map_view"], function(Map_View) {
 
-  var Tweets_Image_View = BaseView.extend({
+  var Tweets_Image_View = Map_View.extend({
+
+    events: {},
 
     render : function(DOMElement) {
       var htmlOut = this.Templating.buildTemplate(
@@ -18,10 +20,9 @@ define(["app/views/BaseView"], function(BaseView) {
       this.el.html(htmlOut)
       $(DOMElement).append(this.el);
     }
-    
+
   });
 
-  var View = View || new Tweets_Image_View();
-  return View;
+  return Tweets_Image_View;
 
 });

@@ -1,6 +1,6 @@
-define(["app/views/BaseView"], function(BaseView) {
+define(["app/views/map_view"], function(Map_View) {
 
-  var Map_Tweets_View = BaseView.extend({
+  var Map_Tweets_View = Map_View.extend({
     events : {
       'mouseup #tweet-refresh-btn' : 'refreshFromCurrentGeo'
     },
@@ -20,17 +20,10 @@ define(["app/views/BaseView"], function(BaseView) {
       );
       this.el.html(htmlOut)
       $(DOMElement).append(this.el);
-    },
-
-    refreshFromCurrentGeo : function() {
-      require(["app/controllers/map_controller"], function(Controller) {
-        Controller.refresh_tweet_map(View.model, View.map.getCenter());
-      })
     }
 
   });
 
-  var View = View || new Map_Tweets_View();
-  return View;
+  return Map_Tweets_View;
 
 });

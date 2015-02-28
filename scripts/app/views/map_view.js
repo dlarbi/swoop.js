@@ -26,12 +26,12 @@ define(["app/views/BaseView", "app/controllers/map_controller"], function(BaseVi
     },
 
     refreshFromCurrentGeo : function() {
-        Controller.refresh_tweet_map(View.model, View.map.getCenter());      
+        Controller.refresh_tweet_map(View.model, View.map.getCenter());
     }
 
   });
 
-  var View = View || new Map_View();
-  return View;
+
+  return Map_View;
 
 });
