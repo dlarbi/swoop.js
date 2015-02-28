@@ -1,4 +1,4 @@
-define(["app/views/BaseView"], function(BaseView) {
+define(["app/views/BaseView", "app/controllers/map_controller"], function(BaseView, Controller) {
 
   var Map_View = BaseView.extend({
     events : {
@@ -21,16 +21,12 @@ define(["app/views/BaseView"], function(BaseView) {
     },
 
     loadTweetsOverlay : function() {
-      require(["app/controllers/map_controller"], function(Controller) {
         Controller.load_tweets_overlay(View.model);
         Controller.load_tweets_images(View.model);
-      });
     },
 
     refreshFromCurrentGeo : function() {
-      require(["app/controllers/map_controller"], function(Controller) {
-        Controller.refresh_tweet_map(View.model, View.map.getCenter());
-      })
+        Controller.refresh_tweet_map(View.model, View.map.getCenter());      
     }
 
   });

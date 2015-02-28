@@ -2,7 +2,6 @@ define(["app/controllers/controller"], function(Controller) {
 
   var _routes = {
     "#/home" : 'load_map',
-
   }
 
   var _currentPath = window.location.hash;
