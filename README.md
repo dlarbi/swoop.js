@@ -26,7 +26,8 @@ Our controller.js looks like this:  A _load_map() method to load up the Model an
     define(function() {
 
       function _load_map() {
-        require(["app/models/map_model", "app/views/map_view"], function(Model, View) {
+        require(["app/models/map_model", "app/views/map_view"], function(Model, Map_View) {
+          View = new Map_View();
           Model.initialize();
           View.initialize(Model);
           View.render('#map-container');
@@ -40,7 +41,7 @@ Our controller.js looks like this:  A _load_map() method to load up the Model an
     });
 
 Notice the pattern of:
-
+      View = new Map_View();
       Model.initialize();
       View.initialize(Model);
       View.render(DOMElement);
@@ -53,7 +54,7 @@ Things get a bit more fun here.   In typical MVC fashion our controller has load
           
     });
 
-Swoop's system for extending BaseView (and BaseModel), works pretty intuitively (think backbone inspired).  Any methods you write in the object passed to extend, will overwrite its super's.
+Swoop's system for extending Views and Models, works pretty intuitively (think backbone inspired).  Any methods you write in the object passed to extend, will overwrite its super's.
 
 #####Events
 
